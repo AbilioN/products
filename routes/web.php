@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ClientController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/' , [IndexController::class , 'index']);
+Route::post('/clients/create' , [ClientController::class , 'create'])->name('clients.create');
