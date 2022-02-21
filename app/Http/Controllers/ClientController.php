@@ -19,7 +19,6 @@ class ClientController extends Controller
     public function create(Request $request)
     {
         try {
-
             $this->repo->prepareParameters($request->all());
             $this->repo->checkParametersBeforeCreate();
             $this->repo->create();
@@ -35,7 +34,12 @@ class ClientController extends Controller
 
     public function show(Request $request)
     {
-        $clients = $this->client->findAll();
+        $clients = $this->repo->findAll();
         return view('clientes' , compact('clients'));
+    }
+
+    public function createView(Request $request)
+    { 
+        return view ('clients-form');
     }
 }

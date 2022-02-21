@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/' , [IndexController::class , 'index']);
 Route::get('clients' , [ClientController::class , 'show'])->name('clients.show');
+Route::get('clients/view' , [ClientController::class , 'createView'])->name('clients.create.form');
+
 Route::post('/clients/create' , [ClientController::class , 'create'])->name('clients.create');
 Route::post('products/create' , [ProductController::class , 'create'])->name('products.create');
