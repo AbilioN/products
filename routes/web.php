@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +23,6 @@ Route::get('/', function () {
 });
 
 Route::get('/' , [IndexController::class , 'index']);
+Route::get('clients' , [ClientController::class , 'show'])->name('clients.show');
 Route::post('/clients/create' , [ClientController::class , 'create'])->name('clients.create');
+Route::post('products/create' , [ProductController::class , 'create'])->name('products.create');

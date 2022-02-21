@@ -9,6 +9,7 @@
     <link href="{{ asset('js/app.js') }} rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/app.css">
 
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <title>Products</title>
 </head>
@@ -23,7 +24,7 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Cadastrar Clientes</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('clients.show')}}">Cadastrar Clientes</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>

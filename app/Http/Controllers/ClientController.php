@@ -2,27 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ClientService;
+use App\Repositories\ClientRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
 
-    private ClientService $client;
+    private ClientRepository $repo;
     
-    function __construct(ClientService $client)
+    function __construct(ClientRepository $repo)
     {
-        $this->client = $client;
+        $this->repo = $repo;
     }
 
     public function create(Request $request)
     {
+        try {
 
-        $this->client->prepareParameters($request->all());
-        $this->client->checkParametersBeforeCreate();
-        $createdClient = $this->client->createClient();
-        
+            $this->repo->prepareParameters($request->all());
+            $this->repo->checkParametersBeforeCreate();
+            $this->repo->create();
+            flash('Client create sucessfully')->success();
+            return redirect()->back();
+        }catch(Exception $e) {
+            flash($e->getMessage())->error();
+            return redirect()->back();
+        }
 
+    
+    }
 
+    public function show(Request $request)
+    {
+        $clients = $this->client->findAll();
+        return view('clientes' , compact('clients'));
     }
 }

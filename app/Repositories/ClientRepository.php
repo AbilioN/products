@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Client;
 use App\ObjectValues\Cpf;
@@ -8,7 +8,7 @@ use App\ObjectValues\Email;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class ClientService 
+class ClientRepository  
 {
 
     private Client $model;
@@ -66,7 +66,7 @@ class ClientService
         throw new Exception('This cpf is already in use');
     }
 
-    public function createClient() : Client
+    public function create() : Client
     {
         DB::beginTransaction();
 
@@ -84,5 +84,10 @@ class ClientService
         DB::commit();
 
         return $client;
+    }
+
+    public function findAll()
+    {
+        return $this->model->all();
     }
 }
