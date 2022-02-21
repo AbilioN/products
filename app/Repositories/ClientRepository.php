@@ -13,7 +13,7 @@ class ClientRepository
 
     private Client $model;
 
-    private string $name;
+    private ?string $name;
 
     private Cpf $cpf;
 
@@ -89,5 +89,16 @@ class ClientRepository
     public function findAll()
     {
         return $this->model->all();
+    }
+
+    public function delete($clientId)
+    {
+        $deleted = $this->model->find($clientId)->delete();
+        if(!$deleted)
+        {
+            throw new Exception('Error, this client could not be deleted');
+        }
+
+        return;
     }
 }

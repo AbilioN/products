@@ -36,4 +36,21 @@ class ClientTest extends TestCase
 
     }
 
+        /** @test */ 
+        public function a_client_name_is_required()
+        {
+            $totalRowsBeforeCreate = $this->model->all()->count();
+    
+            $productArray = $this->client->toArray();
+            $productArray['name'] = '';
+            $response = $this->post(route('clients.create'), $productArray)->assertSessionHasErrors('name');
+            $response->dumpSession();
+           
+            $totalRowsAfterCreate = $this->model->all()->count();
+            $this->assertEquals($totalRowsAfterCreate, $totalRowsBeforeCreate);
+    
+    
+    
+        }
+
 }

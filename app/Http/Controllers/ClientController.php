@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Repositories\ClientRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class ClientController extends Controller
         $this->repo = $repo;
     }
 
-    public function create(Request $request)
+    public function create(ClientRequest $request)
     {
+        dd('create');
         try {
             $this->repo->prepareParameters($request->all());
             $this->repo->checkParametersBeforeCreate();
@@ -41,5 +43,17 @@ class ClientController extends Controller
     public function createView(Request $request)
     { 
         return view ('clients-form');
+    }
+
+    public function delete(Request $request , $clientId)
+    {
+        try {
+            $this->repo->delete($clientId);
+            flash('Client deleted sucessfully')->success();
+            return redirect()->back();
+        }catch(Exception $e) {
+            flash($e->getMessage())->error();
+            return redirect()->back();
+        }
     }
 }

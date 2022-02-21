@@ -19,7 +19,14 @@
                     <td>{{$client->name}}</td>
                     <td>{{$client->email}}</td>
                     <td>{{$client->cpf}}</td>
-
+                    <td>
+                      <form action="{{$client->editUrl()}}">
+                        <button type="submit" class="btn btn-outline-warning" style="width:100%;">Edit</button>
+                      </form>
+                      <form action="{{$client->deleteUrl()}}" method="post">
+                        <button type="button" class="btn btn-outline-danger" style="width:100%;">Delete</button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
            

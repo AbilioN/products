@@ -43,4 +43,20 @@ class ProductTest extends TestCase
         $this->assertEquals($totalRowsAfterCreate, $totalRowsBeforeCreate + 1);
        
     }
+
+    /** @test */ 
+    public function a_product_name_is_required()
+    {
+        $totalRowsBeforeCreate = $this->model->all()->count();
+
+        $productArray = $this->product->toArray();
+        $productArray['name'] = '';
+        $response = $this->post(route('products.create'), $productArray);
+        $response->assertStatus(400);
+        $totalRowsAfterCreate = $this->model->all()->count();
+        $this->assertEquals($totalRowsAfterCreate, $totalRowsBeforeCreate);
+
+
+
+    }
 }
